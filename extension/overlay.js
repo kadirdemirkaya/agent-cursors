@@ -1966,7 +1966,7 @@
     for (i = 0; i < cursors.length; i++) if (!cursors[i].dead && recWanted(cursors[i].job)) jobs.push(cursors[i].job);
     if (!RM) for (i = 0; i < pending.length; i++) if (pending[i].reveal) revs.push(pending[i]);
     if (!jobs.length && !revs.length) return;
-    var items = [], t = now();
+    var items = [], t = now(), urgent = false;
     for (i = 0; i < recs.length && items.length < REC_MAX * 2; i++) {
       if (recs[i].type === 'attributes' && /^data-ac-/.test(recs[i].attributeName || '')) continue;
       recItems(recs[i], items);
@@ -1984,6 +1984,7 @@
         if (rec.hits.length >= REC_MAX) { rec.over = true; continue; }
         rec.hits.push(it);
         rec.last = t;
+        if (j.watch && j.watch.state === 'wait') { j.watch.next = 0; urgent = true; }
       }
       if (it.type === 'add') {
         for (k = 0; k < revs.length; k++) {
@@ -1992,6 +1993,11 @@
         }
       }
     }
+    if (urgent) frameNow();
+  }
+  function frameNow() {
+    if (raf) { W.cancelAnimationFrame(raf); raf = 0; }
+    frame();
   }
 
   var BUILD_SAFE = 3000, BUILD_MAX_EL = 150, BUILD_PIECES = 12, BUILD_LEAD = 250, BUILD_STEP = 100;
