@@ -45,6 +45,8 @@
 
   var MAX_CURSORS = 96;
   var TRAVEL = 900;
+  var LANDED_TRAVEL = 240;
+  var LANDED_ACT = 1;
   var IDLE = 1500;
   var OUT = 450;
   var EVICT = 300;
@@ -1081,9 +1083,14 @@
     var kind = ACT[ev.kind] ? ev.kind : 'edit';
     if (c.job) { release(c.job.ev); endBuild(c.job); }
     if (c.job && c.job.bub) { c.job.bub.cv.width = 0; c.job.bub = null; }
-    var tr = travelDur();
+    var landed = ev.__acFp === true;
+    var tr = landed ? LANDED_TRAVEL : travelDur();
+    if (landed && c.fresh && directTarget && directTarget.el) {
+      var lb = directTarget.el.getBoundingClientRect();
+      c.x = lb.left; c.y = lb.top + lb.height / 2;
+    }
     c.job = {
-      ev: ev, kind: kind, t0: t, p0: { x: c.x, y: c.y }, tr: tr, ad: actDur(kind),
+      ev: ev, kind: kind, t0: t, p0: { x: c.x, y: c.y }, tr: tr, ad: landed ? LANDED_ACT : actDur(kind),
       target: directTarget
         ? { mode: 'el', el: directTarget.el, node: directTarget.node || null, s: directTarget.s || 0, e: directTarget.e || 0, rect: null, goal: null, lines: null }
         : { mode: 'hint', el: null, node: null, s: 0, e: 0, rect: null, goal: null, lines: null },
@@ -2352,7 +2359,7 @@
         if (t.node && !t.node.isConnected) t.node = null;
         t.lines = readLines(t, t.goal || t.rect);
         var bg = bgOf(t.el), txt = (j.ev.delta && j.ev.delta.to) || '';
-        j.cover = !RM && bg && !bg.img && bg.css ? bg.css : '';
+        j.cover = !RM && j.ev.__acFp !== true && bg && !bg.img && bg.css ? bg.css : '';
         j.typeDur = RM || !txt ? 0 : clamp(txt.length * 30, 320, 900);
       }
       if (j.sty) refreshSwatches(j, t.el);
