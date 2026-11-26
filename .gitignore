@@ -1,0 +1,17 @@
+# Markdown: only README.md is published
+*.md
+!/README.md
+
+# Claude Code files
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+
+# Local route config for this folder
+.agent-cursors/
+
+# Demo video (the GIF is published, the MP4 stays local)
+*.mp4
+
+# Local tools (demo recorder)
+.local/

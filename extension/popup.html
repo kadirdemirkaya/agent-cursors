@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<style>
+  body { width: 280px; margin: 0; padding: 14px; font: 13px/1.4 system-ui, sans-serif; color: #1c2230; }
+  h1 { margin: 0 0 10px; font-size: 15px; }
+  label { display: block; padding: 8px 10px; margin-bottom: 8px; border: 1px solid #d7dbe6; border-radius: 8px; cursor: pointer; }
+  label:has(input:checked) { border-color: #3b5bdb; background: #eef1ff; }
+  small { display: block; color: #5b6475; margin-left: 22px; }
+  p { margin: 8px 0 0; color: #5b6475; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>Ajan İmleçleri</h1>
+  <label><input type="radio" name="m" value="group"> <b>Gruplu</b>
+    <small>Aynı elemana dokunan düzenlemeler tek imleç. En fazla 5, çabuk söner.</small></label>
+  <label><input type="radio" name="m" value="file"> <b>Dosya başına</b>
+    <small>Her dosya ayrı imleç. En fazla 15.</small></label>
+  <label><input type="radio" name="m" value="change"> <b>Her değişiklik</b>
+    <small>JSX hedefleri ve CSS seçicileri ayrı imleç. En fazla 15; 5 sn görünür.</small></label>
+  <p>Değişiklik açık sayfalarda hemen geçerli olur.</p>
+  <script src="popup.js"></script>
+</body>
+</html>

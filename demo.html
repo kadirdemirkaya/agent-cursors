@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajan İmleçleri — Demo</title>
+  <style>
+    :root { --ink: #1c2230; --muted: #5b6475; --line: #e3e7ef; --bg: #f6f7fb; --brand: #3b5bdb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    #navbar { background: #fff; border-bottom: 1px solid var(--line); }
+    #navbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-weight: 800; letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: 22px; }
+    .nav-link { color: var(--muted); text-decoration: none; font-weight: 500; }
+    .nav-link:hover { color: var(--ink); }
+
+    #hero { margin: 32px 0; padding: 72px 40px; border-radius: 18px; color: #fff; text-align: center;
+      background: linear-gradient(135deg, #3b5bdb, #7048e8); }
+    .hero-title { margin: 0 0 12px; font-size: 40px; line-height: 1.15; letter-spacing: -.02em; }
+    .hero-sub { margin: 0 auto 28px; max-width: 520px; opacity: .9; }
+    .btn-primary { appearance: none; border: 0; cursor: pointer; padding: 13px 26px; border-radius: 10px;
+      font: 600 16px/1 inherit; color: var(--brand); background: #fff; }
+    .btn-primary:hover { background: #eef1ff; }
+
+    h2 { margin: 40px 0 16px; font-size: 24px; letter-spacing: -.01em; }
+    #features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); }
+    .card--old { border-style: dashed; }
+
+    #signup-form { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 14px; max-width: 520px; }
+    #signup-form label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+    #signup-form input, #signup-form textarea { font: inherit; padding: 10px 12px; border: 1px solid #cdd3e0; border-radius: 8px; }
+    #signup-form button { justify-self: start; }
+    #signup-form .btn-primary { color: #fff; background: var(--brand); }
+
+    #perks { background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: 0; padding: 18px 22px 18px 40px; }
+    #perks li { padding: 4px 0; }
+
+    footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; text-align: center; }
+    @media (max-width: 760px) { #features { grid-template-columns: 1fr; } .hero-title { font-size: 30px; } }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="wrap">
+      <div class="logo">agent·cursors</div>
+      <div class="nav-links">
+        <a class="nav-link" href="#features">Özellikler</a>
+        <a class="nav-link" href="#signup-form">Fiyatlar</a>
+        <a class="nav-link" href="#perks">İletişim</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="hero">
+      <h1 class="hero-title">Ajanın neyi düzenlediğini canlı izleyin</h1>
+      <p class="hero-sub">Ajan bir dosyayı değiştirdiğinde renkli imleç doğrudan ilgili elemana gider.</p>
+      <button id="cta-button" class="btn-primary" type="button">Hemen başla</button>
+    </section>
+
+    <h2>Öne Çıkan Özellikler</h2>
+    <section id="features" class="cards">
+      <article class="card">
+        <h3>Canlı imleçler</h3>
+        <p>Her dosya için ayrı renkte, etiketli bir imleç.</p>
+      </article>
+      <article class="card">
+        <h3>Sıfır bağımlılık</h3>
+        <p>Yalnızca Node built-in modülleri ve vanilla JS.</p>
+      </article>
+      <article class="card card--old">
+        <h3>Eski özellik</h3>
+        <p>Bu kart silinme animasyonunu göstermek için burada.</p>
+      </article>
+    </section>
+
+    <h2>Bültene katılın</h2>
+    <form id="signup-form" onsubmit="return false">
+      <label>Ad Soyad
+        <input id="fullname" type="text" placeholder="Ayşe Yılmaz">
+      </label>
+      <label>E-posta
+        <input id="email" type="email" placeholder="ayse@ornek.com">
+      </label>
+      <label>Mesajınız
+        <textarea id="message" rows="3" placeholder="Kısaca anlatın"></textarea>
+      </label>
+      <button class="btn-primary" type="submit">Kaydol</button>
+    </form>
+
+    <h2>Neler dahil?</h2>
+    <ul id="perks">
+      <li>Canlı düzenleme takibi</li>
+      <li>Tek satırlık kurulum</li>
+      <li>Statik HTML ve dev sunucularında aynı şekilde çalışır</li>
+      <li>HMR'de çift imleç oluşmaz</li>
+    </ul>
+  </main>
+
+  <footer>agent-cursors demo · <code>node daemon.mjs</code> ve <code>node simulate.mjs --kind all</code></footer>
+
+  <script src="http://127.0.0.1:7373/overlay.js"></script>
+</body>
+</html>

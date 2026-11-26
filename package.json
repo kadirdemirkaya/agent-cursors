@@ -1,0 +1,16 @@
+{
+  "name": "agent-cursors",
+  "version": "2.0.0",
+  "description": "Claude Code / Codex bir dosyayı düzenlerken, değişiklik uygulanmadan ÖNCE tarayıcıdaki canlı sayfada ajan imleci elemana gelir (sıfır bağımlılık).",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.3"
+  },
+  "scripts": {
+    "setup": "node setup.mjs",
+    "start": "node daemon.mjs",
+    "simulate": "node simulate.mjs --kind all",
+    "test": "node --test"
+  }
+}
